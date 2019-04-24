@@ -1,0 +1,17 @@
+public class Item {
+	int itemID = 0;
+	float itemPrice = 0;
+	String itemName= null;
+
+	public Item(String name, float price, int iD) {
+		this.itemName = name;
+		this.itemPrice = price;
+		this.itemID = iD;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+}
