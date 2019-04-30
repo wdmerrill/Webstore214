@@ -1,0 +1,132 @@
+public class Item {//Will's code
+	int itemID;
+	double itemPrice;
+	String itemName= null;
+	static ArrayList<Item> items = new ArrayList<Item>();//Creates an array of class objects
+	double itemPricePreComparable;//holds a variable to be used for conversion/comparable
+	int itemPriceComparable;//holds converted integer to be used for comparing
+	
+	public Item(String name, double price, int iD) {
+		this.itemName = name;
+		this.itemPrice = price;
+		this.itemID = iD;
+		this.itemPricePreComparable = price*100;//converts to easily comparable number with no rounding
+		this.itemPriceComparable = (int)itemPricePreComparable;//converts double to int for comparable
+	}
+	
+	public String getName() {
+		return this.itemName;
+	}
+	public double getPrice() {
+		return this.itemPrice;
+	}
+	public int getID() {
+		return this.itemID;
+	}
+	
+	public static void main(String[] args) {
+		items.add(new Item("tv", 210.87, 13200));
+		items.add(new Item("shirt", 15.99, 15877));
+		items.add(new Item("iPad", 180.99, 12345));
+	}
+	
+	public static void sorterID() {//ID sorting method
+		Collections.sort(items, new ItemIDComparator());
+		//for( Item i : items) {
+			//System.out.println(i.getName());}
+	}
+	public static void sorterPrice() {//Price Sorting method
+		Collections.sort(items, new ItemPriceComparator());
+		//for( Item i : items) {
+			//System.out.println(i.getName());}
+	}
+	public static void sorterName() {//Name sorting method
+		Collections.sort(items, new ItemNameComparator());
+		//for( Item i : items) {
+			//System.out.println(i.getName());}
+	}//End of Will's code
+//jacob's code
+	public String seachname(String nameInput) {
+		for(Item i : items) {
+			String x = i.getName();
+			if (x == nameInput) {
+					return x;}
+		}
+		return null;
+//end of jacob's code;
+	}//
+	static String[] Username = {"Jai","Rest of the team"};
+	static String[] Password = {"Jai","Rest of the team"};
+	static boolean z = false;
+	static boolean y = false ;
+	static  LinkedList<String> newUser = new LinkedList<String>();
+	static  LinkedList<String> newPass = new LinkedList<String>();
+	public static void CreateAccount(String a,String b) {
+		for(int i =0;i<Username.length;i++) {newUser.add(Username[i]);}
+		for(int j = 0;j<Password.length;j++) {newPass.add(Password[j]);}
+		System.out.println("The Account has been Created");
+		newUser.add(a);
+		newPass.add(b);
+	}
+	public static void UserAuthencication(String a,String b) {
+		for(int i = 0;i<Username.length;i++) {
+			if(a.equals(Username[i])) {
+				y = true;
+				//System.out.println("jai");
+			}
+		}
+		for(int i = 0;i<Password.length;i++) {
+			if(b.equals(Password[i])) {
+				z = true;
+				//System.out.println("jai2");
+			}
+		}
+		if(z == true && y == true) {
+			System.out.println("You have Loged in");
+			//System.out.println("jai3");
+		}
+	}
+	//Orion's code
+	public static double total(ArrayList<Item> selectedItems, int amount) {
+		int tempAmount = amount - 1;
+		double random = 0;
+		if(tempAmount > 0) {
+			double temp = selectedItems.get(tempAmount).getPrice() + total(selectedItems, tempAmount);
+			return temp;
+		}	
+		return random;
+	}
+	//End of Orion's code
+	static LinkedList<Integer> wishLister = new LinkedList<>();
+	// accepts the item id as a parameter
+    public static String addToWishList(int id) {
+    	//check if the wish list already contains the id, if it does it will not add it again
+        if(wishLister.contains(id)) {
+            return ("This item is already in the wish list");
+        }
+        //if the id isn't in the list it adds it
+        else {
+            wishLister.add(id);
+            return("Added to wish list!");
+        }
+    }
+    // method returns the wish list as a string
+    public static LinkedList<Integer> viewWishList() {
+		return wishLister;
+	}
+}//More will's code
+class ItemIDComparator implements Comparator<Item> {//custom comparable for Item ID
+    public int compare(Item arg0, Item arg1) {
+        return arg0.itemID - arg1.itemID;}
+}
+class ItemPriceComparator implements Comparator<Item>{//Custom comparable for Item Price
+	public int compare(Item arg0, Item arg1) {
+		return arg0.itemPriceComparable - arg1.itemPriceComparable;}
+}
+
+class ItemNameComparator implements Comparator<Item>{// custom comparable for Item Names
+	public int compare(Item arg0, Item arg1) {
+		return arg0.itemName.compareToIgnoreCase(arg1.itemName);}}
+
+
+
