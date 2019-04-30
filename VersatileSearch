@@ -1,0 +1,8 @@
+	public String seachname(String nameInput) {
+		for(Item i : items) {
+			String x = i.getName();
+			if (x == nameInput) {
+					return x;}
+		}
+		return null;
+	}
